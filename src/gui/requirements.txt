@@ -1,0 +1,2 @@
+# Phase11-only dependency boundary. Already installed; no installation performed.
+PySide6==6.11.2

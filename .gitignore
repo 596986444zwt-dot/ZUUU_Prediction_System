@@ -1,0 +1,113 @@
+﻿# ============================================================
+# ZUUU Prediction System - Git Ignore
+# ============================================================
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# PyCharm / IDE
+.idea/
+*.iml
+
+# Environment / secrets
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+credentials/
+
+# Runtime databases - DO NOT upload
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-wal
+*.sqlite3-shm
+/database/
+
+# Runtime logs
+logs/
+*.log
+
+# Build / packaged application
+build/
+dist/
+*.spec
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Runtime / soak evidence
+soak/
+SOAK_*/
+runtime/
+runtime_data/
+
+# Large generated/archive outputs
+outputs/
+artifacts/
+cache/
+
+# Local test/runtime state
+*.pid
+*.lock
+# Runtime raw data
+raw/
+# Runtime generated data
+data/
+*T0_FORWARD_COVERAGE.csv
+backups/
+
+# Local review exports and evidence archives (keep originals on disk)
+/reports/
+/SCRIPT_REVIEW_*.md
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+*.tgz
+*.pkl
+*.pickle
+*.joblib
+*.exe
+
+# Publish a reviewed documentation allowlist, not audit datasets or snapshots.
+/docs/**/*
+!/docs/**/
+!/docs/phase7/PHASE7_FEATURE_CONTRACT.md
+!/docs/phase9/PHASE9_PROBABILITY_PROTOCOL_V1.md
+!/docs/phase10/PHASE10_ARCHITECTURE.md
+!/docs/phase10/PHASE10_TIME_SEMANTICS.md
+!/docs/phase10/PHASE10_PREDICTION_CONTRACT.md
+!/docs/t0_experimental_v1/T0_METHOD_SPEC.md
+!/docs/t0_experimental_v1/T0_FORWARD_VALIDATION_SPEC.md
+!/docs/t0_experimental_v1/T0_DATABASE_SCHEMA.md
+
+# Retain reproducible GUI packaging source.
+!/src/gui/packaging/*.spec
