@@ -41,4 +41,5 @@ jobs:
           tests/test_zuuu_time_normalizer.py
           tests/test_zuuu_observation_record.py
           tests/test_zuuu_raw_identity.py
+          tests/test_zuuu_raw_archive.py
           -q
