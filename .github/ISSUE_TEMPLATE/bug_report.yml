@@ -1,0 +1,66 @@
+name: Bug report / 问题报告
+description: Report a reproducible bug with sanitized evidence.
+title: '[Bug]: '
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: 'Do not submit secrets, Cookies, Authorization headers, production databases, raw datasets, or personal data. Report sensitive exposures privately via SECURITY.md. Reproduce in a separate development checkout.'
+  - type: input
+    id: os
+    attributes:
+      label: Operating system / 操作系统
+      placeholder: Windows 11, Ubuntu 24.04, etc.
+    validations:
+      required: true
+  - type: input
+    id: python
+    attributes:
+      label: Python version
+      placeholder: Python 3.13.x
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: ZUUU project commit
+      description: Output of git rev-parse HEAD; no account credentials.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps / 复现步骤
+      description: Provide minimal steps with synthetic or sanitized inputs.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior / 预期行为
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior / 实际行为
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Sanitized logs / 脱敏日志
+      description: Optional short excerpt only. Remove keys, tokens, Cookies, Authorization headers, personal paths and identifiers; do not attach a log archive or database.
+      render: text
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots / 截图
+      description: Optional sanitized screenshots. Remove private information and live operational data before sharing.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Safe disclosure
+      options:
+        - label: I checked that this report contains no secrets, production database, private/raw dataset, or personal data.
+          required: true

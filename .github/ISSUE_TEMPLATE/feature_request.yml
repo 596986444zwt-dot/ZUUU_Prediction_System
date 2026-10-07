@@ -1,0 +1,32 @@
+name: Feature request / 功能建议
+description: Propose a concrete improvement with scope and expected value.
+title: '[Feature]: '
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: 'Share sanitized examples only. Do not attach secrets, databases, raw datasets, or private evidence. A feature request does not authorize a production or model-status change.'
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / 当前问题
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal / 建议方案
+    validations:
+      required: true
+  - type: textarea
+    id: value
+    attributes:
+      label: Expected value / 预期价值
+      description: Who benefits and how would we verify the improvement?
+    validations:
+      required: true
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation idea / 实现思路
+      description: Include scope, alternatives, tests and T0/T+1/T+2 impact if known.

@@ -1,0 +1,3 @@
+# Public unit tests only; no model, GUI, collector, or production dependencies.
+pytest>=8.4,<10
+tzdata>=2025.2

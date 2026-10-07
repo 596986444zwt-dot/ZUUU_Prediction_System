@@ -1,0 +1,49 @@
+name: Research proposal / 研究提案
+description: Propose causal meteorological or ML research with a validation plan.
+title: '[Research]: '
+labels: [research]
+body:
+  - type: markdown
+    attributes:
+      value: 'Describe sources and protocols; do not upload datasets, databases, credentials, or private evidence. Research is offline and does not authorize collector changes or model promotion.'
+  - type: textarea
+    id: question
+    attributes:
+      label: Research question / 研究问题
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Dataset or source / 数据来源
+      description: Public source links, licensing, date window, label definition, sample support and missingness. Do not attach raw data.
+    validations:
+      required: true
+  - type: textarea
+    id: method
+    attributes:
+      label: Proposed method / 研究方法
+      description: Include baseline and scope for T0/T+1/T+2.
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation method / 验证方法
+      description: Specify walk-forward/OOS design, fit/selection/calibration windows, metrics and common-sample comparisons.
+    validations:
+      required: true
+  - type: textarea
+    id: leakage
+    attributes:
+      label: Leakage risk / 泄漏风险
+      description: Define as-of rules, true receipt vs run time, settlement eligibility, revisions and controls against future leakage.
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Expected output / 预期产物
+      description: Reproducible offline code, synthetic tests and a limitations-aware report; not a promised performance gain or automatic Champion.
+    validations:
+      required: true

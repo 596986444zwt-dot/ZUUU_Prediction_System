@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Private security report / 私密安全报告
+    url: https://github.com/596986444zwt-dot/ZUUU_Prediction_System/security/advisories/new
+    about: Report credentials, sensitive exposures and vulnerabilities privately. Never post them in a public Issue.
+  - name: Contribution guide / 贡献指南
+    url: https://github.com/596986444zwt-dot/ZUUU_Prediction_System/blob/main/CONTRIBUTING.md
+    about: Read installation, public-test and research-validation requirements before opening a PR.
