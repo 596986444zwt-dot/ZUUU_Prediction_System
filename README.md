@@ -85,7 +85,11 @@ python -m pytest tests/test_zuuu_metar_parser.py tests/test_zuuu_metar_temperatu
 
 请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)，通过 Fork、分支与 Pull Request 参与，避免直接修改 `main`。涉及特征、模型、概率或时间语义的修改应附独立验证，不应自动晋升实验方法。
 
-`LICENSE_PENDING_USER_DECISION`：许可证由项目所有者决定，当前尚未授予开源许可证。公开可见性与使用、修改、再分发授权是不同事项。
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+项目所有者已选择 MIT License；CONTRIBUTING.md 中原有的许可证待定提示已由本节取代。贡献流程仍按该指南执行。
 
 ## 风险与免责声明
 
