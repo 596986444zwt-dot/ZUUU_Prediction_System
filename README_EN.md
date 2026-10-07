@@ -65,20 +65,19 @@ This is a conceptual data flow. Historical training is separate from loading fro
 
 ## Installation
 
-Use Python 3.13 in a separate development checkout. Windows example:
+### Windows development setup
+
+These steps are intended for a clean Windows development checkout. They do not require administrator rights, changing the system `PATH`, or changing the PowerShell execution policy.
+
+#### 1. Check Python 3.13
+
+Open PowerShell and run:
 
 ```powershell
-git clone https://github.com/596986444zwt-dot/ZUUU_Prediction_System.git
-cd ZUUU_Prediction_System
-py -3.13 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install numpy pandas scipy scikit-learn lightgbm requests pytest tzdata
-python -m pip install -r src/gui/requirements.txt
+py -3.13 --version
 ```
 
-For public tests only, install `requirements-ci.txt`; model and GUI dependencies are unnecessary. If activation is blocked by Windows policy, invoke `.\.venv\Scripts\python.exe` directly instead of changing system policy. On Linux/macOS, create the environment with `python3.13 -m venv .venv` and activate it with `source .venv/bin/activate`.
 
-PySide6 is pinned in the GUI dependency file. A complete production dependency lock is not available yet; the general installation commands are a development starting point, not a verified reproducible production environment. Install packaging tools separately when needed.
 
 ## Running
 

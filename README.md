@@ -65,20 +65,79 @@ T0 为 `T0_EXPERIMENTAL / FORWARD_VALIDATION`，包含 Level0 与 L1_A 候选方
 
 ## 安装
 
-建议在独立开发目录使用 Python 3.13，创建虚拟环境：
+### Windows 开发环境
+
+以下步骤适用于干净的 Windows 开发副本。不需要管理员权限、不需要修改系统 `PATH`，也不需要修改 PowerShell 执行策略。
+
+#### 1. 检查 Python 3.13
+
+打开 PowerShell 并运行：
+
+```powershell
+py -3.13 --version
+```
+
+应显示 Python 3.13.x。
+
+如果 `py -3.13` 不可用，请安装 Python 3.13，并确保 Python Launcher 可用。不要仅为了本项目修改系统 `PATH`。
+
+#### 2. 克隆仓库
 
 ```powershell
 git clone https://github.com/596986444zwt-dot/ZUUU_Prediction_System.git
 cd ZUUU_Prediction_System
-py -3.13 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install numpy pandas scipy scikit-learn lightgbm requests pytest tzdata
-python -m pip install -r src/gui/requirements.txt
 ```
 
-仅运行公开测试时不需要模型或 GUI 依赖：`python -m pip install -r requirements-ci.txt`。Windows 激活脚本受策略限制时，可直接运行 `.\.venv\Scripts\python.exe -m pip ...`，不必更改系统执行策略。
+#### 3. 创建本地虚拟环境
 
-GUI 依赖文件固定了 PySide6 版本。其余依赖尚无完整的版本锁定清单，上述安装是开发起点，不能视为已验证的跨平台可复现环境。打包工具仅在需要构建桌面应用时另行安装。
+```powershell
+py -3.13 -m venv .venv
+```
+
+虚拟环境保存在项目目录的 `.venv` 中，不会修改系统 Python 安装。
+
+#### 4. 不激活虚拟环境直接使用
+
+激活不是必须的。可以直接调用虚拟环境中的 Python：
+
+```powershell
+.\.venv\Scripts\python.exe --version
+```
+
+安装公开测试所需的最小依赖：
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r requirements-ci.txt
+```
+
+如果 PowerShell 激活脚本受到 Windows 执行策略限制，可以继续直接使用 `.\.venv\Scripts\python.exe`，不需要修改系统执行策略。
+
+#### 5. 运行公开测试
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -p no:cacheprovider tests/test_zuuu_metar_parser.py tests/test_zuuu_metar_temperature_parser.py tests/test_zuuu_time_normalizer.py tests/test_zuuu_observation_record.py tests/test_zuuu_raw_identity.py -q
+```
+
+这些是公开测试使用的测试子集，不需要仓库中未提供的生产数据库或冻结模型资产。
+
+#### 6. 可选：安装 GUI 依赖
+
+如果需要开发桌面 GUI，可以另外安装 GUI 依赖：
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r src/gui/requirements.txt
+```
+
+GUI 依赖文件固定了 PySide6 版本。GUI 依赖不是运行公开解析器和观测测试所必需的。
+
+### Windows 故障排查
+
+- **找不到 `py -3.13`：** Python 3.13 未通过 Python Launcher 提供。安装 Python 3.13 后，再运行 `py -3.13 --version` 检查。
+- **虚拟环境激活被阻止：** 不要修改系统执行策略。直接使用 `.\.venv\Scripts\python.exe` 运行命令。
+- **时区相关错误：** CI 依赖包含 `tzdata`。运行测试前，请先安装 `requirements-ci.txt`。
+- **GUI 导入或依赖错误：** 只有开发 GUI 时才需要安装 `src/gui/requirements.txt`。
+- **缺少生产数据库或冻结模型资产：** 干净克隆不包含生产运行状态。Phase10 需要本地 Phase7/8/9 数据库以及经过 hash 校验的冻结状态，包括 `docs/phase8/model_states/` 下的资产。缺少这些资产时，不能进行完整的正式预测部署。
+- **Windows `.BAT` 启动脚本：** 现有 BAT 文件包含原部署机器的绝对 Python 解释器路径。该路径对新的开发副本不可移植，因此应优先使用本地 `.venv\Scripts\python.exe`。
 
 ## 运行
 
@@ -104,15 +163,21 @@ python scripts/t0_experimental.py start
 
 ## 测试
 
-在独立开发副本中先运行解析器单元测试：
+在独立开发副本中先运行公开测试：
 
 ```powershell
-python -m pytest -p no:cacheprovider tests/test_zuuu_metar_parser.py tests/test_zuuu_metar_temperature_parser.py tests/test_zuuu_time_normalizer.py tests/test_zuuu_observation_record.py tests/test_zuuu_raw_identity.py -q
+.\.venv\Scripts\python.exe -m pytest -p no:cacheprovider tests/test_zuuu_metar_parser.py tests/test_zuuu_metar_temperature_parser.py tests/test_zuuu_time_normalizer.py tests/test_zuuu_observation_record.py tests/test_zuuu_raw_identity.py -q
 ```
 
 GitHub Actions 使用 Python 3.13 和最小依赖运行同一子集（解析器、业务日期、观测记录和内存数据库身份规则）。CI 不启动 worker 或 collector，不下载私有数据，不读取生产数据库。PR 使用只读权限，无部署或模型晋升步骤。
 
-完整测试入口是 `python -m pytest tests`。部分集成、审计和 GUI 测试依赖未分发的历史数据库、模型或本地部署状态，需要自行准备隔离夹具；不保证干净克隆可直接通过完整测试。不要在正在运行 Soak 的正式目录中运行未确认副作用的测试。
+完整测试入口是：
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest tests
+```
+
+部分集成、审计和 GUI 测试依赖未分发的历史数据库、模型或本地部署状态，需要自行准备隔离夹具；不保证干净克隆可直接通过完整测试。不要在正在运行 Soak 的正式目录中运行未确认副作用的测试。
 
 Full production validation requires local frozen assets not included in the repository.
 
